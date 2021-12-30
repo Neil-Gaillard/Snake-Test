@@ -166,6 +166,7 @@
     <ClCompile Include="src\maths\mat4.cpp" />
     <ClCompile Include="src\maths\vec2.cpp" />
     <ClCompile Include="src\maths\vec4.cpp" />
+    <ClCompile Include="src\snake\snake.cpp" />
     <ClCompile Include="src\utils\utils.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -177,6 +178,7 @@
     <ClInclude Include="src\maths\mat4.hpp" />
     <ClInclude Include="src\maths\vec2.hpp" />
     <ClInclude Include="src\maths\vec4.hpp" />
+    <ClInclude Include="src\snake\snake.hpp" />
     <ClInclude Include="src\utils\utils.hpp" />
   </ItemGroup>
   <ItemGroup>

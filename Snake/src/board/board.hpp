@@ -2,6 +2,8 @@
 
 #include "boardComponent.hpp"
 
+#include "../snake/snake.hpp"
+
 namespace board
 {
 	class Board
@@ -16,6 +18,8 @@ namespace board
 		Board();
 		~Board();
 
-		inline BoardComponent getBoardComponent(const int x, const int y) const { return *this->board[y][x]; }
+		inline BoardComponent* getBoardComponent(const int x, const int y) const { return this->board[y][x]; }
+
+		void updateSnakePositions(const snake::Snake* snake) const;
 	};
 }

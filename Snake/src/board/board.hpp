@@ -20,6 +20,6 @@ namespace board
 
 		inline BoardComponent* getBoardComponent(const int x, const int y) const { return this->board[y][x]; }
 
-		void updateSnakePositions(const snake::Snake* snake) const;
+		bool updateSnakePositions(const snake::Snake* snake) const;
 	};
 }

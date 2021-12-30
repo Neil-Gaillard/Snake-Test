@@ -7,6 +7,7 @@ namespace snake
 	Snake::Snake(const maths::vec2 initialPosition, const int size)
 	: m_current_position(initialPosition.get_x_pos(), initialPosition.get_y_pos()), m_size(size), m_direction(direction::Direction::RIGHT)
 	{
+		this->m_last_deleted_position = maths::vec2(initialPosition.get_x_pos() - this->m_size, initialPosition.get_y_pos());
 		for (int i = initialPosition.get_x_pos() - this->m_size + 1; i < initialPosition.get_x_pos(); ++i)
 			this->m_previous_positions.insert(this->m_previous_positions.begin(), maths::vec2(i, initialPosition.get_y_pos()));
 	}
@@ -36,8 +37,8 @@ namespace snake
 
 		this->m_previous_positions.insert(this->m_previous_positions.begin(), this->getCurrentPosition());
 		this->m_current_position = newPos;
+		this->m_last_deleted_position = this->m_previous_positions.back();
 		this->m_previous_positions.pop_back();
-
 		return true;
 	}
 }

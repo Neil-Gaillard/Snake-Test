@@ -18,10 +18,21 @@ namespace board
 		delete[] this->board;
 	}
 
-	void Board::updateSnakePositions(const snake::Snake* snake) const
+	bool Board::updateSnakePositions(const snake::Snake* snake) const
 	{
-		for (int i = 0 ; i < snake->getSize() - 1; ++i )
+		this->board[snake->getLastDeletedPosition().get_y_pos()][snake->getLastDeletedPosition().get_x_pos()]->setActive(false);
+
+		if (this->board[snake->getCurrentPosition().get_y_pos()][snake->getCurrentPosition().get_x_pos()]->isActive()) {
+			this->board[snake->getLastDeletedPosition().get_y_pos()][snake->getLastDeletedPosition().get_x_pos()]->setActive(true);
+			return false;
+		}
+		
+		for (int i = 0; i < snake->getSize() - 1; ++i) {
 			this->board[snake->getPreviousPositions(i).get_y_pos()][snake->getPreviousPositions(i).get_x_pos()]->setActive(true);
+			this->board[snake->getPreviousPositions(i).get_y_pos()][snake->getPreviousPositions(i).get_x_pos()]->setColor(maths::vec4(0.8f, 0.8f, 0.8f, 1.0f));
+		}
 		this->board[snake->getCurrentPosition().get_y_pos()][snake->getCurrentPosition().get_x_pos()]->setActive(true);
+		this->board[snake->getCurrentPosition().get_y_pos()][snake->getCurrentPosition().get_x_pos()]->setColor(maths::vec4(0.9f, 0.0f, 0.0f, 1.0f));
+		return true;
 	}
 }

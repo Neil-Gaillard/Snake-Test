@@ -11,6 +11,7 @@ namespace snake
 	{
 	private:
 		maths::vec2 m_current_position;
+		maths::vec2 m_last_deleted_position;
 		int m_size;
 		direction::Direction m_direction;
 
@@ -21,6 +22,7 @@ namespace snake
 
 		inline int getSize() const { return this->m_size; }
 		inline maths::vec2 getCurrentPosition() const { return this->m_current_position; }
+		inline maths::vec2 getLastDeletedPosition() const { return this->m_last_deleted_position; }
 		inline maths::vec2 getPreviousPositions(const int i) const { return this->m_previous_positions.at(i); }
 		inline direction::Direction getDirection() const { return this->m_direction; }
 

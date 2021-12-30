@@ -9,7 +9,7 @@ namespace board
 	class Board
 	{
 	public:
-		constexpr static int SIZE = 20;
+		constexpr static int SIZE = 15;
 
 	private:
 		BoardComponent*** board;
@@ -20,6 +20,8 @@ namespace board
 
 		inline BoardComponent* getBoardComponent(const int x, const int y) const { return this->board[y][x]; }
 
-		bool updateSnakePositions(const snake::Snake* snake) const;
+		bool updateSnakePositions(snake::Snake* snake) const;
+
+		void createApple() const;
 	};
 }

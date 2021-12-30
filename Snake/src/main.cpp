@@ -19,7 +19,7 @@
 
 #define INITIAL_X_POSITION 10
 #define INITIAL_Y_POSITION 10
-#define INITIAL_SIZE 9
+#define INITIAL_SIZE 4
 
 void initiate_vbo();
 
@@ -29,6 +29,8 @@ void move_snake(snake::Snake* snake, const board::Board* board);
 
 int main()
 {
+	srand(time(nullptr));
+
 	const auto* window = new graphics::Window(WINDOW_WIDTH, WINDOW_HEIGHT, WINDOW_TITLE);
 	const auto* shader = new graphics::Shader(VERTEX_SHADER_PATH, FRAGMENT_SHADER_PATH);
 	shader->enable();
@@ -39,6 +41,8 @@ int main()
 	initiate_vbo();
 
 	std::thread moveSnakeThread(move_snake, snake, board);
+
+	board->createApple();
 
 	while (!window->closed())
 	{
@@ -71,7 +75,7 @@ void update_window(const board::Board* board, const graphics::Window* window, co
 	//TODO maybe research a little bite more opengl in order to have something better? 
 	for (int i = 0; i < board::Board::SIZE; i++) {
 		for (int j = 0; j < board::Board::SIZE; j++) {
-			if (board->getBoardComponent(j, i)->isActive()) {
+			if (board->getBoardComponent(j, i)->isActive() || board->getBoardComponent(j, i)->isApple()) {
 				GLfloat vertices[board::BoardComponent::NUMBER_VERTICES];
 				memcpy(vertices, board->getBoardComponent(j, i)->getVertices(), board::BoardComponent::NUMBER_VERTICES * sizeof(GLfloat));
 				glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
@@ -86,5 +90,5 @@ void update_window(const board::Board* board, const graphics::Window* window, co
 void move_snake(snake::Snake* snake, const board::Board* board)
 {
 	while (snake->move() && board->updateSnakePositions(snake))
-		Sleep(200);
+		Sleep(300 - (snake->getSize() * 8));
 }

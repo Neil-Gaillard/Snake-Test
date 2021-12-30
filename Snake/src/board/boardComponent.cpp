@@ -12,7 +12,7 @@ namespace board
 	}
 
 	BoardComponent::BoardComponent(const maths::vec2 position, const maths::vec4 color, const bool active) :
-		m_position(position), m_vertices(new GLfloat[NUMBER_VERTICES]), m_active(active), m_color(color)
+		m_position(position), m_vertices(new GLfloat[NUMBER_VERTICES]), m_active(active), m_is_apple(false), m_color(color)
 	{
 		const GLfloat vertices[NUMBER_VERTICES] = 
 		{

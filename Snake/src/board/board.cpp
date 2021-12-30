@@ -1,5 +1,7 @@
 #include "board.hpp"
 
+#include <random>
+
 namespace board
 {
 	Board::Board() : board(new BoardComponent**[SIZE])
@@ -18,10 +20,15 @@ namespace board
 		delete[] this->board;
 	}
 
-	bool Board::updateSnakePositions(const snake::Snake* snake) const
+	bool Board::updateSnakePositions(snake::Snake* snake) const
 	{
-		this->board[snake->getLastDeletedPosition().get_y_pos()][snake->getLastDeletedPosition().get_x_pos()]->setActive(false);
+		if (this->board[snake->getCurrentPosition().get_y_pos()][snake->getCurrentPosition().get_x_pos()]->isApple()) {
+			this->board[snake->getCurrentPosition().get_y_pos()][snake->getCurrentPosition().get_x_pos()]->setApple(false);
+			snake->makeBigger();
+			this->createApple();
+		}
 
+		this->board[snake->getLastDeletedPosition().get_y_pos()][snake->getLastDeletedPosition().get_x_pos()]->setActive(false);
 		if (this->board[snake->getCurrentPosition().get_y_pos()][snake->getCurrentPosition().get_x_pos()]->isActive()) {
 			this->board[snake->getLastDeletedPosition().get_y_pos()][snake->getLastDeletedPosition().get_x_pos()]->setActive(true);
 			return false;
@@ -34,5 +41,18 @@ namespace board
 		this->board[snake->getCurrentPosition().get_y_pos()][snake->getCurrentPosition().get_x_pos()]->setActive(true);
 		this->board[snake->getCurrentPosition().get_y_pos()][snake->getCurrentPosition().get_x_pos()]->setColor(maths::vec4(0.9f, 0.0f, 0.0f, 1.0f));
 		return true;
+	}
+
+	void Board::createApple() const
+	{
+		int posX, posY;
+
+		do {
+			posX = rand() % SIZE;
+			posY = rand() % SIZE;
+		} while (this->board[posY][posX]->isActive());
+
+		this->board[posY][posX]->setApple(true);
+		this->board[posY][posX]->setColor(maths::vec4(1.0f, 0.0f, 0.0f, 1.0f));
 	}
 }

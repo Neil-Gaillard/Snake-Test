@@ -41,4 +41,10 @@ namespace snake
 		this->m_previous_positions.pop_back();
 		return true;
 	}
+
+	void Snake::makeBigger()
+	{
+		this->m_previous_positions.push_back(this->m_last_deleted_position);
+		++this->m_size;
+	}
 }

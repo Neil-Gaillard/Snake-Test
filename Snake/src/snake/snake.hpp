@@ -28,6 +28,8 @@ namespace snake
 
 		inline void setDirection(const direction::Direction direction) { this->m_direction = direction; }
 
+		void makeBigger();
+
 		bool move();
 	};
 }

@@ -24,6 +24,8 @@ namespace snake
 		inline maths::vec2 getPreviousPositions(const int i) const { return this->m_previous_positions.at(i); }
 		inline direction::Direction getDirection() const { return this->m_direction; }
 
-		void move(const direction::Direction direction);
+		inline void setDirection(const direction::Direction direction) { this->m_direction = direction; }
+
+		void move();
 	};
 }

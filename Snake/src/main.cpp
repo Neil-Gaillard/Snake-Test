@@ -41,6 +41,16 @@ int main()
 	while (!window->closed())
 	{
 		board->updateSnakePositions(snake);
+
+		if (window->isKeyPressed(GLFW_KEY_UP))
+			snake->setDirection(direction::Direction::UP);
+		if (window->isKeyPressed(GLFW_KEY_DOWN))
+			snake->setDirection(direction::Direction::DOWN);
+		if (window->isKeyPressed(GLFW_KEY_RIGHT))
+			snake->setDirection(direction::Direction::RIGHT);
+		if (window->isKeyPressed(GLFW_KEY_LEFT))
+			snake->setDirection(direction::Direction::LEFT);
+
 		update_window(board, window, shader);
 	}
 	return 0;
@@ -66,8 +76,8 @@ void update_window(const board::Board* board, const graphics::Window* window, co
 void move_snake(snake::Snake* snake)
 {
 	while (true) {
-		snake->move(direction::Direction::RIGHT);
-		Sleep(1000);
+		snake->move();
+		Sleep(500);
 	}
 
 }

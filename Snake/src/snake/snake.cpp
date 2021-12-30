@@ -8,9 +8,27 @@ namespace snake
 			this->m_previous_positions.push_back(maths::vec2(9 - i, 10));
 	}
 
-	void Snake::move(const direction::Direction direction)
+	void Snake::move()
 	{
-		for (auto& m_previous_position : this->m_previous_positions)
-			m_previous_position += maths::vec2(1, 0);
+		maths::vec2 newPos;
+		switch (this->m_direction)
+		{
+		case direction::Direction::UP:
+			newPos = maths::vec2(0, -1);
+			break;
+		case direction::Direction::DOWN:
+			newPos = maths::vec2(0, 1);
+			break;
+		case direction::Direction::LEFT:
+			newPos = maths::vec2(-1, 0);
+			break;
+		case direction::Direction::RIGHT:
+			newPos = maths::vec2(1, 0);
+		}
+
+		this->m_current_position += newPos;
+
+		//for (auto& m_previous_position : this->m_previous_positions)
+		//	m_previous_position += newPos;
 	}
 }

@@ -17,8 +17,8 @@
 
 #define COLOR_MATRIX "given_color"
 
-#define INITIAL_X_POSITION 10
-#define INITIAL_Y_POSITION 10
+#define INITIAL_X_POSITION 7
+#define INITIAL_Y_POSITION 7
 #define INITIAL_SIZE 4
 
 void initiate_vbo();
@@ -89,6 +89,10 @@ void update_window(const board::Board* board, const graphics::Window* window, co
 
 void move_snake(snake::Snake* snake, const board::Board* board)
 {
-	while (snake->move() && board->updateSnakePositions(snake))
-		Sleep(300 - (snake->getSize() * 8));
+	while (snake->move() && board->updateSnakePositions(snake)) {
+		if (300 - (snake->getSize() * 8) > 50)
+			Sleep(300 - (snake->getSize() * 8));
+		else
+			Sleep(50);
+	}
 }

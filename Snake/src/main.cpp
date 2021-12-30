@@ -75,9 +75,6 @@ void update_window(const board::Board* board, const graphics::Window* window, co
 
 void move_snake(snake::Snake* snake)
 {
-	while (true) {
-		snake->move();
+	while (snake->move())
 		Sleep(500);
-	}
-
 }

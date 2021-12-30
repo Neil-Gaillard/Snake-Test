@@ -1,5 +1,7 @@
 #include "snake.hpp"
 
+#include "../board/board.hpp"
+
 namespace snake
 {
 	Snake::Snake() : m_current_position(10, 10), m_size(4), m_direction(direction::Direction::RIGHT)
@@ -8,7 +10,7 @@ namespace snake
 			this->m_previous_positions.push_back(maths::vec2(9 - i, 10));
 	}
 
-	void Snake::move()
+	bool Snake::move()
 	{
 		maths::vec2 newPos;
 		switch (this->m_direction)
@@ -25,10 +27,16 @@ namespace snake
 		case direction::Direction::RIGHT:
 			newPos = maths::vec2(1, 0);
 		}
+		newPos += this->m_current_position;
+		
+		if (newPos.get_x_pos() < 0 || newPos.get_x_pos() >= board::Board::SIZE ||
+			newPos.get_y_pos() < 0 || newPos.get_y_pos() >= board::Board::SIZE)
+			return false;
 
-		this->m_current_position += newPos;
+		this->m_previous_positions.push_back(this->getCurrentPosition());
+		this->m_current_position = newPos;
+		this->m_previous_positions.pop_back();
 
-		//for (auto& m_previous_position : this->m_previous_positions)
-		//	m_previous_position += newPos;
+		return true;
 	}
 }

@@ -4,10 +4,11 @@
 
 namespace snake
 {
-	Snake::Snake() : m_current_position(10, 10), m_size(4), m_direction(direction::Direction::RIGHT)
+	Snake::Snake(const maths::vec2 initialPosition, const int size)
+	: m_current_position(initialPosition.get_x_pos(), initialPosition.get_y_pos()), m_size(size), m_direction(direction::Direction::RIGHT)
 	{
-		for (int i = 0; i < 3; ++i)
-			this->m_previous_positions.push_back(maths::vec2(9 - i, 10));
+		for (int i = initialPosition.get_x_pos() - this->m_size + 1; i < initialPosition.get_x_pos(); ++i)
+			this->m_previous_positions.insert(this->m_previous_positions.begin(), maths::vec2(i, initialPosition.get_y_pos()));
 	}
 
 	bool Snake::move()
@@ -33,7 +34,7 @@ namespace snake
 			newPos.get_y_pos() < 0 || newPos.get_y_pos() >= board::Board::SIZE)
 			return false;
 
-		this->m_previous_positions.push_back(this->getCurrentPosition());
+		this->m_previous_positions.insert(this->m_previous_positions.begin(), this->getCurrentPosition());
 		this->m_current_position = newPos;
 		this->m_previous_positions.pop_back();
 

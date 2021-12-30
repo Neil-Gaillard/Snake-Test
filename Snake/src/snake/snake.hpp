@@ -17,7 +17,7 @@ namespace snake
 		std::vector<maths::vec2> m_previous_positions;
 
 	public:
-		Snake();
+		Snake(const maths::vec2 initialPosition, const int size);
 
 		inline int getSize() const { return this->m_size; }
 		inline maths::vec2 getCurrentPosition() const { return this->m_current_position; }

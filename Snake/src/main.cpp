@@ -17,6 +17,10 @@
 
 #define COLOR_MATRIX "given_color"
 
+#define INITIAL_X_POSITION 10
+#define INITIAL_Y_POSITION 10
+#define INITIAL_SIZE 4
+
 void update_window(const board::Board* board, const graphics::Window* window, const graphics::Shader* shader);
 
 void move_snake(snake::Snake* snake);
@@ -26,7 +30,7 @@ int main()
 	const auto* window = new graphics::Window(WINDOW_WIDTH, WINDOW_HEIGHT, WINDOW_TITLE);
 	const auto* shader = new graphics::Shader(VERTEX_SHADER_PATH, FRAGMENT_SHADER_PATH);
 	const auto* board = new board::Board();
-	auto* snake = new snake::Snake();
+	auto* snake = new snake::Snake(maths::vec2(INITIAL_X_POSITION, INITIAL_Y_POSITION), INITIAL_SIZE);
 
 	GLuint vbo;
 	glGenBuffers(1, &vbo);
@@ -76,5 +80,5 @@ void update_window(const board::Board* board, const graphics::Window* window, co
 void move_snake(snake::Snake* snake)
 {
 	while (snake->move())
-		Sleep(500);
+		Sleep(300);
 }

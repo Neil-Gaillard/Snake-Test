@@ -50,7 +50,7 @@ namespace board
 		do {
 			posX = rand() % SIZE;
 			posY = rand() % SIZE;
-		} while (this->board[posY][posX]->isActive());
+		} while (this->board[posY][posX]->isActive() || this->board[posY][posX]->isApple());
 
 		this->board[posY][posX]->setApple(true);
 		this->board[posY][posX]->setColor(maths::vec4(1.0f, 0.0f, 0.0f, 1.0f));

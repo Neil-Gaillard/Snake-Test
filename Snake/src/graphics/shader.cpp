@@ -4,13 +4,14 @@
 
 #include <vector>
 #include <iostream>
+#include <GL/glew.h>
 
 #define PROJECTION_MATRIX "projection_matrix"
 
 #define LEFT 0.0F
-#define RIGHT 15.0F
+#define RIGHT 20.0F
 #define BOTTOM 0.0F
-#define TOP 15.0F
+#define TOP 20.0F
 #define NEAR (-1.0F)
 #define FAR 1.0F
 

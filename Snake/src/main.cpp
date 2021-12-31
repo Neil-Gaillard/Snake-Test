@@ -21,6 +21,8 @@
 #define INITIAL_Y_POSITION 7
 #define INITIAL_SIZE 4
 
+#define NUMBER_APPLES 1
+
 void initiate_vbo();
 
 void update_window(const board::Board* board, const graphics::Window* window, const graphics::Shader* shader);
@@ -29,7 +31,7 @@ void move_snake(snake::Snake* snake, const board::Board* board);
 
 int main()
 {
-	srand(time(nullptr));
+	srand(static_cast<unsigned int>(time(nullptr)));
 
 	const auto* window = new graphics::Window(WINDOW_WIDTH, WINDOW_HEIGHT, WINDOW_TITLE);
 	const auto* shader = new graphics::Shader(VERTEX_SHADER_PATH, FRAGMENT_SHADER_PATH);
@@ -42,7 +44,8 @@ int main()
 
 	std::thread moveSnakeThread(move_snake, snake, board);
 
-	board->createApple();
+	for (int i = 0 ; i < NUMBER_APPLES; ++i)
+		board->createApple();
 
 	while (!window->closed())
 	{

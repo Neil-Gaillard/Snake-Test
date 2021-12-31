@@ -9,7 +9,7 @@ namespace board
 	class Board
 	{
 	public:
-		constexpr static int SIZE = 15;
+		constexpr static int SIZE = 20;
 
 	private:
 		BoardComponent*** board;
